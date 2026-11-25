@@ -47,6 +47,24 @@ const mainPanelTop = siteConfig.banner.enable
 <slot slot="head" name="head"></slot>
 <div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto" class:list={[""]}>
     <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all">
+        <svg class="absolute size-0 pointer-events-none" aria-hidden="true" focusable="false">
+            <filter id="navbar-glass-refraction" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.16 0.21" numOctaves="2" seed="12" result="grain" />
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5.25" edgeMode="duplicate" result="softBackdrop" />
+                <feDisplacementMap in="softBackdrop" in2="grain" scale="21" xChannelSelector="R" yChannelSelector="G" result="refracted" />
+                <feDiffuseLighting in="grain" surfaceScale="3" lighting-color="white" result="relief">
+                    <feDistantLight azimuth="228" elevation="41" />
+                </feDiffuseLighting>
+                <feComponentTransfer in="relief" result="contrast">
+                    <feFuncR type="linear" slope="1.5" intercept="-0.43" />
+                    <feFuncG type="linear" slope="1.5" intercept="-0.43" />
+                    <feFuncB type="linear" slope="1.5" intercept="-0.43" />
+                </feComponentTransfer>
+                <feComposite in="refracted" in2="SourceGraphic" operator="over" result="filledBackdrop" />
+                <feBlend in="contrast" in2="filledBackdrop" mode="soft-light" result="textured" />
+                <feComposite in="textured" in2="SourceGraphic" operator="in" />
+            </filter>
+        </svg>
         <Navbar></Navbar>
     </div>
 </div>
@@ -123,3 +141,30 @@ const mainPanelTop = siteConfig.banner.enable
     </div>
 </div>
 </Layout>
+
+<style>
+    #navbar-wrapper :global(#navbar > .card-base),
+    #navbar-wrapper :global(#navbar > .absolute:first-child) {
+        background-color: transparent;
+    }
+
+    /* The glass sits outside the navbar's opacity animation. */
+    #navbar-wrapper::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        border-radius: 0 0 1rem 1rem;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgb(255 255 255 / 52%), rgb(255 255 255 / 43%));
+        -webkit-backdrop-filter: blur(6px) saturate(115%);
+        backdrop-filter: blur(6px) saturate(115%);
+        backdrop-filter: url("#navbar-glass-refraction") saturate(115%);
+        box-shadow: inset 0 -1px 0 rgb(255 255 255 / 55%), 0 6px 20px rgb(11 51 84 / 12%);
+    }
+
+    :global(html.dark) #navbar-wrapper::before {
+        background: linear-gradient(180deg, rgb(19 26 41 / 65%), rgb(19 26 41 / 56%));
+        box-shadow: inset 0 -1px 0 rgb(255 255 255 / 18%), 0 6px 20px rgb(0 0 0 / 24%);
+    }
+</style>
