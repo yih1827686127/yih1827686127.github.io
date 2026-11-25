@@ -51,7 +51,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/demo-avatar.png",
 	name: "Lexury · 黄怿",
-	bio: "我在香港科技大学（广州）读 DSA 博士",
+	bio: "Yi Huang｜香港科技大学（广州）DSA 博士生",
 	links: [
 		{
 			name: "GitHub",
