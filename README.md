@@ -28,6 +28,6 @@
     pnpm build
     pnpm dlx gh-pages@6.3.0 --dist dist --branch gh-pages --dotfiles
 
-绑定自己的域名后，用 `SITE_URL` 设置正式 HTTPS 网址再构建，发布时加上 `--cname` 和自定义域名。这样站点地图、RSS 和规范网址会使用同一个域名。
+正式构建使用 https://yihuanglab.top/ 作为站点地址，站点地图、RSS 和规范网址使用同一个域名。临时预览可通过 SITE_URL 覆盖构建地址。
 
 Fuwari 的原始图源说明见[模板的关于页](https://github.com/saicaca/fuwari/blob/6d39b0d/src/content/spec/about.md)。
