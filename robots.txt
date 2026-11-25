@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yih1827686127.github.io/sitemap-index.xml
+Sitemap: https://yihuanglab.top/sitemap-index.xml
