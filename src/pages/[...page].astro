@@ -17,12 +17,12 @@ const { page } = Astro.props;
 const len = page.data.length;
 ---
 
-<MainGridLayout description="黄怿（Yi Huang，Lexury）的个人博客。香港科技大学（广州）数据科学与分析博士生，研究方向为波浪能、流体力学与人工智能。">
+<MainGridLayout description="我是黄怿（Yi Huang，Lexury），在香港科技大学（广州）读数据科学与分析博士。我在这里写波浪能、流体力学和人工智能，也记一点读论文和做项目的心得。">
     {page.currentPage === 1 && (
         <section class="card-base px-6 py-6 md:px-9 mb-4">
             <h1 class="text-3xl font-bold text-90">黄怿（Yi Huang）</h1>
-            <p class="mt-3 text-75">香港科技大学（广州）数据科学与分析（DSA）博士生。这里记录我在港科广开展的波浪能、流体力学与人工智能交叉研究。</p>
-            <p class="mt-2 text-75" lang="en">PhD student in Data Science and Analytics at The Hong Kong University of Science and Technology (Guangzhou).</p>
+            <p class="mt-3 text-75">我在香港科技大学（广州）读数据科学与分析（DSA）博士，研究波浪能、流体力学和人工智能。这个博客用来记做项目时碰到的问题。有些已有了答案，有些还得回去翻论文。</p>
+            <p class="mt-2 text-75" lang="en">I'm a PhD student in Data Science and Analytics at The Hong Kong University of Science and Technology (Guangzhou).</p>
             <a class="inline-block mt-4 link text-[var(--primary)] font-medium" href="/cv/">学术履历 / Academic CV</a>
         </section>
     )}
