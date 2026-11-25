@@ -1,0 +1,39 @@
+---
+import Markdown from "@components/misc/Markdown.astro";
+import { getEntry, render } from "astro:content";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+const chinese = await getEntry("spec", "cv-zh");
+const english = await getEntry("spec", "cv-en");
+
+if (!chinese || !english) {
+	throw new Error("Both language versions of the CV are required");
+}
+
+const { Content: ChineseCV } = await render(chinese);
+const { Content: EnglishCV } = await render(english);
+---
+
+<MainGridLayout
+    title="黄怿（Yi Huang）｜学术履历｜香港科技大学（广州）"
+    description="黄怿（Yi Huang，Lexury）的中英文学术履历。香港科技大学（广州）数据科学与分析博士在读，中山大学物理学本科，研究兴趣为波浪能、流体力学与人工智能。"
+>
+    <article class="card-base px-6 py-8 md:px-9" data-pagefind-body>
+        <h1 class="text-3xl font-bold text-90">黄怿（Yi Huang）｜学术履历</h1>
+        <p class="mt-3 text-75">常用昵称 Lexury，校方名录署名 HUANG, Yi。</p>
+        <p class="mt-2 text-75">香港科技大学（广州）数据科学与分析（DSA）博士生，中山大学物理学本科（2022–2026）。</p>
+        <nav class="flex flex-wrap gap-4 mt-4 text-[var(--primary)]" aria-label="履历语言">
+            <a class="link font-medium" href="#cv-zh">中文履历</a>
+            <a class="link font-medium" href="#cv-en" lang="en">English CV</a>
+            <a class="link font-medium" href="https://dsa.hkust-gz.edu.cn/people/students/doctor-of-philosophy/">校方博士生名录</a>
+        </nav>
+        <section class="mt-8" aria-labelledby="cv-zh">
+            <h2 id="cv-zh" class="text-2xl font-bold text-90 scroll-mt-8">中文履历</h2>
+            <Markdown class="mt-4"><ChineseCV /></Markdown>
+        </section>
+        <section class="mt-10 pt-8 border-t border-black/10 dark:border-white/15" lang="en" aria-labelledby="cv-en">
+            <h2 id="cv-en" class="text-2xl font-bold text-90 scroll-mt-8">English CV</h2>
+            <Markdown class="mt-4"><EnglishCV /></Markdown>
+        </section>
+    </article>
+</MainGridLayout>
