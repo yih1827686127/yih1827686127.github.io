@@ -1,0 +1,56 @@
+---
+import { academicProfile, profileConfig, siteConfig } from "@/config";
+
+interface Props {
+    kind: "home" | "profile";
+}
+
+const { kind } = Astro.props;
+const { name, englishName, directoryName, nickname, university } = academicProfile;
+const homeUrl = new URL("/", Astro.site);
+const pageUrl = new URL(Astro.url.pathname, homeUrl).href;
+const websiteId = new URL("#website", homeUrl).href;
+
+const person = {
+    "@type": "Person",
+    "@id": new URL("#person", homeUrl).href,
+    name,
+    alternateName: [englishName, directoryName, nickname],
+    url: homeUrl.href,
+    affiliation: {
+        "@type": "CollegeOrUniversity",
+        name: university.name,
+        alternateName: [university.shortName, university.englishName, "HKUST(GZ)"],
+        url: university.url,
+    },
+    sameAs: profileConfig.links.map(({ url }) => url),
+    subjectOf: {
+        "@type": "WebPage",
+        url: university.directory,
+    },
+};
+
+const page = {
+    "@type": kind === "home" ? "WebPage" : "ProfilePage",
+    "@id": pageUrl,
+    url: pageUrl,
+    inLanguage: "zh-CN",
+    isPartOf: { "@id": websiteId },
+    mainEntity: person,
+};
+
+const website = {
+    "@type": "WebSite",
+    "@id": websiteId,
+    name: `${name}（${englishName}）的个人主页`,
+    alternateName: [siteConfig.title, "Fluid AI Lab"],
+    url: homeUrl.href,
+    inLanguage: "zh-CN",
+};
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": kind === "home" ? [website, page] : [page],
+};
+---
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replaceAll("<", "\\u003c")}></script>

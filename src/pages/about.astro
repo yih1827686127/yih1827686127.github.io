@@ -1,9 +1,8 @@
 ---
 
 import { getEntry, render } from "astro:content";
+import AcademicProfileMetadata from "@components/AcademicProfileMetadata.astro";
 import Markdown from "@components/misc/Markdown.astro";
-import I18nKey from "../i18n/i18nKey";
-import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
 const aboutPost = await getEntry("spec", "about");
@@ -14,7 +13,11 @@ if (!aboutPost) {
 
 const { Content } = await render(aboutPost);
 ---
-<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
+<MainGridLayout
+    title="关于黄怿（Yi Huang）｜香港科技大学（广州）"
+    description="黄怿（Yi Huang，Lexury）是香港科技大学（广州）数据科学与分析学域博士生。了解他在港科广的研究方向与学术经历。"
+>
+    <AcademicProfileMetadata slot="head" kind="profile" />
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
         <div class="card-base z-10 px-9 py-6 relative w-full ">
             <Markdown class="mt-2">

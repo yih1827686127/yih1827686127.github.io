@@ -1,7 +1,9 @@
 ---
 import type { GetStaticPaths } from "astro";
+import AcademicProfileMetadata from "../components/AcademicProfileMetadata.astro";
 import Pagination from "../components/control/Pagination.astro";
 import PostPage from "../components/PostPage.astro";
+import { academicProfile } from "../config";
 import { PAGE_SIZE } from "../constants/constants";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
@@ -15,15 +17,27 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const len = page.data.length;
+const isHome = page.currentPage === 1;
+const { name, englishName, nickname, university } = academicProfile;
+const profileName = `${name}（${englishName}）`;
 ---
 
-<MainGridLayout description="黄怿（Yi Huang，Lexury）的个人博客。香港科技大学（广州）数据科学与分析博士生，研究方向为波浪能、流体力学与人工智能。">
-    {page.currentPage === 1 && (
+<MainGridLayout
+    title={isHome ? `${profileName}｜${university.shortName}博士生 · 个人主页` : `博客 · 第 ${page.currentPage} 页`}
+    description={isHome ? `${name}（${englishName}，${nickname}）的个人主页与博客。${university.name}（${university.shortName}）数据科学与分析博士生，研究方向为波浪能、流体力学与人工智能。` : undefined}
+>
+    <Fragment slot="head">
+        {isHome && <AcademicProfileMetadata kind="home" />}
+    </Fragment>
+    {isHome && (
         <section class="card-base px-6 py-6 md:px-9 mb-4">
-            <h1 class="text-3xl font-bold text-90">黄怿（Yi Huang）</h1>
-            <p class="mt-3 text-75">香港科技大学（广州）数据科学与分析（DSA）博士生。这里记录我在港科广开展的波浪能、流体力学与人工智能交叉研究。</p>
-            <p class="mt-2 text-75" lang="en">PhD student in Data Science and Analytics at The Hong Kong University of Science and Technology (Guangzhou).</p>
-            <a class="inline-block mt-4 link text-[var(--primary)] font-medium" href="/cv/">学术履历 / Academic CV</a>
+            <h1 class="text-3xl font-bold text-90">{profileName}</h1>
+            <p class="mt-3 text-75">我是{name}，在{university.name}（简称{university.shortName}）数据科学与分析学域攻读博士。这里记录我在波浪能、流体力学与人工智能交叉领域的研究。</p>
+            <p class="mt-2 text-75" lang="en">PhD student in Data Science and Analytics at {university.englishName}.</p>
+            <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[var(--primary)] font-medium">
+                <a class="link" href="/about/">关于{name}</a>
+                <a class="link" href="/cv/">学术履历 / Academic CV</a>
+            </div>
         </section>
     )}
     <PostPage page={page}></PostPage>

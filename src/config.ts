@@ -61,6 +61,20 @@ export const profileConfig: ProfileConfig = {
 	],
 };
 
+export const academicProfile = {
+	name: "黄怿",
+	englishName: "Yi Huang",
+	directoryName: "HUANG, Yi",
+	nickname: "Lexury",
+	university: {
+		name: "香港科技大学（广州）",
+		englishName: "The Hong Kong University of Science and Technology (Guangzhou)",
+		shortName: "港科广",
+		url: "https://www.hkust-gz.edu.cn/",
+		directory: "https://dsa.hkust-gz.edu.cn/people/students/doctor-of-philosophy/",
+	},
+};
+
 export const licenseConfig: LicenseConfig = {
 	enable: false,
 	name: "",
