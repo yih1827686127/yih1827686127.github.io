@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Lexury</title><description>黄怿（Yi Huang）· Fluid AI Lab</description><link>https://yihuanglab.top/</link><language>zh-CN</language><item><title>关于这个博客</title><link>https://yihuanglab.top/posts/welcome/</link><guid isPermaLink="true">https://yihuanglab.top/posts/welcome/</guid><description>黄怿（Yi Huang，Lexury）的个人博客与研究方向。</description><pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;大家好，我是黄怿（Yi Huang），也常用昵称 &lt;strong&gt;Lexury&lt;/strong&gt;。我关注波浪能、流体力学与人工智能的交叉研究。&lt;/p&gt;
-&lt;p&gt;我常想，怎样把对流体现象的物理认识放进模型里？又怎样判断模型给出的结果在实际波浪问题上是否说得通？这里会记录我在这些问题上的学习笔记、论文阅读和项目进展。&lt;/p&gt;
-&lt;p&gt;如果你想了解我从中山大学物理学本科到香港科技大学（广州）数据科学与分析博士阶段的学习和科研经历，可以从&lt;a href=&quot;/cv/&quot;&gt;学术履历 / CV&lt;/a&gt;读起。&lt;/p&gt;
-</content:encoded></item></channel></rss>
